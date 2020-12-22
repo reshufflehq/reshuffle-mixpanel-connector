@@ -1,52 +1,104 @@
-## BEGIN - TO DELETE TILL END
+## Reshuffle Mixpanel Connector
 
-THIS IS A TEMPLATE REPO FOR NEW RESHUFFLE CONNECTORS
-1. Create a new connector repo from this template using this link https://github.com/reshufflehq/reshuffle-template-connector/generate
-2. Clone the repo locally
-3. Rename all occurrences of _CONNECTOR_NAME_
-4. `npm install`
-5. `npm run build:watch`
-6. Implement your events/actions in `src/index.ts`
-7. `npm run lint`
-8. Push your code
-9. Go to https://app.circleci.com/projects/project-dashboard/github/reshufflehq/
-    a. You should see your new connector repo
-    b. click on `Set Up Project` for the repo
-    c. click on `Use Existing Config`
-    d. click on `Start Building`
+`npm install reshuffle-mixpanel-connector`
 
-10. If circle CI checks are all green, you are all set!
+_ES6 import_: `import { MixpanelConnector } from 'reshuffle-mixpanel-connectors'`
 
-// Keep documentation template below
+This is a [Reshuffle](https://reshuffle.com) connector that provides an Interface to the Mixpanel Platform.
 
-## END
+This connector uses [Mixpanel node](https://www.npmjs.com/package/mixpanel) package.
 
-# reshuffle-_CONNECTOR_NAME_-connector
+#### Example
+```js
+const { Reshuffle } = require('reshuffle')
+const { MixpanelConnector } = require('reshuffle-mixpanel-connector')
 
-### Reshuffle _CONNECTOR_NAME_ Connector
+const app = new Reshuffle()
+const mixpanelConnector = new MixpanelConnector(app, {
+    token: '<mixpanel-token>',
+    secret: '<mixpanel-secret>',
+})
 
-This connector provides <description>.
+mixpanelConnector.track('test', { key1: 'value1', key2: 'value2' })
+```
 
-#### Configuration Options:
+### Table of Contents
+
+[Setup Mixpanel](#setup)
+
+[Configuration Options](#configuration)
+
+#### Connector Events
+
+N/A
+
+#### Connector Actions
+
+[Track](#track)
+
+[Import](#import)
+
+[SDK](#sdk) - Get a Mixpanel client
+
+
+### <a name="setup"></a>Setup Mixpanel
+Follow the instructions [here](https://help.mixpanel.com/hc/en-us/articles/115004502806)
+
+### <a name="configuration"></a>Configuration Options
 ```typescript
-interface _CONNECTOR_NAME_ConnectorConfigOptions {
-  foo: string // foo description
-  bar?: number // bar description
+export interface MixpanelConnectorConfigOptions {
+    token: string
+    secret: string
 }
 ```
 
-#### Connector events
+Example:
+```typescript
+const { Reshuffle } = require('reshuffle')
+const { MixpanelConnector } = require('reshuffle-mixpanel-connector')
 
-##### event1 description
-The connector fires this event when ...
+const app = new Reshuffle()
+const mixpanelConnector = new MixpanelConnector(app, {
+    token: '<mixpanel-token>',
+    secret: '<mixpanel-secret>',
+})
+```
 
-##### event2 description
-The connector fires this event when ...
+### Connector events
+N/A
 
-#### Connector actions
+#### <a name="track"></a>Track
 
-##### action1
-The connector provides action1 which ...
+For tracking events
+```typescript
+track(eventName: string, properties?: Record<string, any>): void
+```
 
-##### action2
-The connector provides action2 which ...
+#### <a name="import"></a>Import
+
+For importing events
+```typescript
+import(eventName: string, time: Date | number, properties?: Record<string, any>): void
+```
+
+#### <a name="sdk"></a>SDK
+
+Returns a Mixpanel client ([See details on npm](https://www.npmjs.com/package/mixpanel))
+
+```typescript
+ sdk() : Mixpanel.Mixpanel
+```
+See Mixpanel.Mixpanel class in [Mixpanel Node type](https://github.com/mixpanel/mixpanel-node/blob/master/lib/mixpanel-node.d.ts#L45)
+
+Example using the sdk:
+```typescript
+const { Reshuffle } = require('reshuffle')
+const { MixpanelConnector } = require('reshuffle-mixpanel-connector')
+
+const app = new Reshuffle()
+const mixpanelConnector = new MixpanelConnector(app, {
+    token: '<mixpanel-token>',
+    secret: '<mixpanel-secret>',
+})
+mixpanelConnector.sdk().import('action', Date.now())
+```
