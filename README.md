@@ -8,7 +8,7 @@
 
 _ES6 import_: `import { MixpanelConnector } from 'reshuffle-mixpanel-connectors'`
 
-This is a [Reshuffle](https://reshuffle.com) connector that provides an Interface to the [Mixpanel](https://mixpanel.com) Platform.
+This is a [Reshuffle](https://github.com/reshufflehq/reshuffle) connector that provides an Interface to the [Mixpanel](https://mixpanel.com) Platform.
 
 This connector uses [Mixpanel node](https://www.npmjs.com/package/mixpanel) package.
 
