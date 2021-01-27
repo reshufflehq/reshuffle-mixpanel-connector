@@ -1,10 +1,14 @@
 ## Reshuffle Mixpanel Connector
 
+[Code](https://github.com/reshufflehq/reshuffle-mixpanel-connector) |
+[npm](https://www.npmjs.com/package/reshuffle-mixpanel-connector) |
+
+
 `npm install reshuffle-mixpanel-connector`
 
 _ES6 import_: `import { MixpanelConnector } from 'reshuffle-mixpanel-connectors'`
 
-This is a [Reshuffle](https://reshuffle.com) connector that provides an Interface to the Mixpanel Platform.
+This is a [Reshuffle](https://github.com/reshufflehq/reshuffle) connector that provides an Interface to the [Mixpanel](https://mixpanel.com) Platform.
 
 This connector uses [Mixpanel node](https://www.npmjs.com/package/mixpanel) package.
 
